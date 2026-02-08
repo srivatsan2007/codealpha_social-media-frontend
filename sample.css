@@ -1,0 +1,186 @@
+    body {
+  background-color: #f5f5f5;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  height: 100vh;
+  overflow: hidden; /* important */
+}
+
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      padding: 20px;
+       z-index: 1000;
+    }
+
+    .sidebar h3 {
+      font-weight: bold;
+      color: #ff0066;
+      margin-bottom: 30px;
+    }
+
+    .nav-link {
+      color: #333;
+      font-size: 16px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link:hover {
+      background: #f0f0f0;
+      border-radius: 10px;
+    }
+
+    /* Main Content */
+    .main-content {
+  margin-left: 270px; /* space for sidebar */
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center; /* CENTER horizontally */
+  padding: 30px 20px;
+  scroll-behavior: smooth;
+}
+
+/* Limit Content Width */
+
+.main-content > * {
+  width: 100%;
+  max-width: 600px; /* Instagram-style feed */
+}
+
+    /* Profile Card */
+    .profile-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff0066;
+    }
+
+    /* Post box */
+    .post-box textarea {
+      resize: none;
+    }
+    /* Dark theme */
+    .dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-theme .sidebar {
+  background-color: #1e1e1e;
+  border-right: 1px solid #333;
+}
+
+.dark-theme .profile-card {
+  background-color: #1f1f1f;
+  color: #ffffff;
+}
+
+.dark-theme .nav-link {
+  color: #ffffff;
+}
+
+.dark-theme .nav-link:hover {
+  background-color: #2a2a2a;
+}
+/* Video in home */
+.reels-container {
+  height: 80vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+
+.reel {
+  position: relative;
+  height: 75vh;
+  margin-bottom: 20px;
+  scroll-snap-align: start;
+  border-radius: 12px;
+  overflow: hidden;
+  background: black;
+}
+
+.reel video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reel-actions {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reel-actions button {
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+
+
+    /* Mobile */
+    @media(max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .main-content {
+    margin-left: 0;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .main-content > * {
+    max-width: 100%;
+  }
+}
+
+
+<!-- CREATE POST -->
+  <div class="profile-card post-box">
+    <h5>Create Post</h5>
+    <textarea
+  id="caption"
+  class="form-control mb-3"
+  rows="3"
+  placeholder="What's on your mind?"
+></textarea>
+
+    <button class="btn btn-danger w-100" onclick="createPost()">Post</button>
+  </div>
+
+  <!-- POSTS FEED -->
+  <div class="profile-card" id="feed">
+  <h6>Feed</h6>
+</div>

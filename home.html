@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>InstaSphere | Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+/* ===== Global polish ===== */
+body {
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff0066;
+  border-radius: 10px;
+}
+
+/* ===== Sidebar ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+}
+
+.sidebar h3 {
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  padding: 10px 15px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-link i {
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  background: rgba(255, 0, 102, 0.1);
+  color: #ff0066;
+  transform: translateX(5px);
+}
+
+/* ===== Main content ===== */
+.main-content {
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Cards ===== */
+.profile-card {
+  border: none;
+  backdrop-filter: blur(6px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* ===== Create post ===== */
+.post-box textarea {
+  border-radius: 12px;
+}
+
+.post-box button {
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Feed posts ===== */
+#feed .profile-card p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Like & comment buttons */
+#feed button {
+  background: none;
+  border: none;
+  font-size: 15px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+#feed button:hover {
+  color: #ff0066;
+}
+
+
+/* ===== Reels ===== */
+.reel {
+  height: 420px;
+  max-height: 450px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+
+.reel-actions button {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.reel-actions button:hover {
+  transform: scale(1.15);
+  background: rgba(255, 0, 102, 0.8);
+}
+
+/* ===== Dark mode polish ===== */
+.dark-theme {
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+}
+
+.dark-theme .profile-card {
+  box-shadow: 0 8px 20px rgba(255,255,255,0.05);
+}
+
+.dark-theme .reel {
+  box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+}
+
+.dark-theme .nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  color: #ff4d94;
+}
+
+.main-content {
+  margin-left: 270px;   /* space for fixed sidebar */
+  padding: 30px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.main-content > * {
+  width: 100%;
+  max-width: 600px;   /* Instagram feed width */
+}
+
+/* ===== Sidebar entrance animation ===== */
+.sidebar {
+  animation: slideInSidebar 0.6s ease forwards;
+}
+
+@keyframes slideInSidebar {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ===== Nav item stagger animation ===== */
+.nav-link {
+  opacity: 0;
+  transform: translateX(-15px);
+  animation: navFade 0.5s ease forwards;
+}
+
+.nav-link:nth-child(2) { animation-delay: 0.1s; }
+.nav-link:nth-child(3) { animation-delay: 0.2s; }
+.nav-link:nth-child(4) { animation-delay: 0.3s; }
+.nav-link:nth-child(5) { animation-delay: 0.4s; }
+.nav-link:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes navFade {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.nav-link:hover {
+  background: rgba(255, 0, 102, 0.12);
+  color: #ff0066;
+  transform: translateX(8px);
+  box-shadow: inset 4px 0 0 #ff0066;
+}
+
+.nav-link i {
+  transition: transform 0.25s ease;
+}
+
+.nav-link:hover i {
+  transform: scale(1.2) rotate(-5deg);
+}
+
+.dark-theme .nav-link:hover {
+  background: rgba(255,255,255,0.1);
+  box-shadow: inset 4px 0 0 #ff4d94;
+}
+
+/* ============================= */
+/* MOBILE BOTTOM NAVBAR */
+/* ============================= */
+@media (max-width: 768px) {
+
+  body {
+    padding-bottom: 70px; /* space for bottom nav */
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    padding: 0;
+    background: #ffffff;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -8px 20px rgba(0,0,0,0.12);
+    animation: slideUpNav 0.5s ease;
+    z-index: 2000;
+  }
+
+  /* Hide logo text on mobile */
+  .sidebar h3 {
+    display: none;
+  }
+
+  /* Nav links */
+  .sidebar .nav-link {
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11px;
+    margin: 0;
+    padding: 6px 0;
+    opacity: 1;
+    transform: none;
+  }
+
+  .sidebar .nav-link i {
+    font-size: 22px;
+  }
+
+  /* Remove hover slide on mobile */
+  .sidebar .nav-link:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+}
+
+@keyframes slideUpNav {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile icon tap animation */
+@media (max-width: 768px) {
+
+  .sidebar .nav-link i {
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar .nav-link:active i {
+    transform: scale(1.3);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .sidebar .nav-link::after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background: #ff0066;
+    border-radius: 50%;
+    margin-top: 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .sidebar .nav-link:active::after {
+    opacity: 1;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .dark-theme .sidebar {
+    background: #1e1e1e;
+    border-top: 1px solid #333;
+  }
+
+  .dark-theme .sidebar .nav-link {
+    color: #fff;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <h3>InstaSphere</h3>
+
+  <a class="nav-link" href="profile.html"><i class="bi bi-person-circle"></i> Profile</a>
+  <a class="nav-link" href="reels.html"><i class="bi bi-camera-reels"></i> Reels</a>
+  <a class="nav-link" href="#"><i class="bi bi-chat-dots"></i> Messages</a>
+  <a class="nav-link" href="createpost.html"><i class="bi bi-plus-square"></i> Create Post</a>
+  <!-- Theme Toggle -->
+<div class="mt-4">
+  <div class="form-check form-switch">
+    <input
+      class="form-check-input"
+      type="checkbox"
+      id="themeToggle"
+      onchange="toggleTheme()"
+    >
+    <label class="form-check-label" for="themeToggle">
+      🌙 Dark Mode
+    </label>
+  </div>
+</div>
+
+  <a class="nav-link text-danger" href="#" onclick="logout()">
+    <i class="bi bi-box-arrow-right"></i> Logout
+  </a>
+</div>
+
+<!--MAIN CONTENT -->
+<div class="main-content">
+
+  <!-- PROFILE 
+  <div class="profile-card d-flex align-items-center gap-4">
+    <img src="https://via.placeholder.com/100" class="profile-img" id="profilePhoto">
+    <div>
+      <h4 id="username">Welcome, User</h4>
+      <input type="file" class="form-control mt-2" onchange="uploadPhoto(event)">
+    </div>
+  </div>-->
+
+  <div class="profile-card reels-container">
+  <h6>Reels</h6>
+
+  <div class="reel">
+    <video src="./video/reel2.mp4"
+           autoplay
+           loop
+           muted></video>
+
+    <div class="reel-actions">
+      <button onclick="likeReel(this)">❤️ <span>0</span></button>
+      <button onclick="openReelComments()">💬</button>
+    </div>
+  </div>
+
+  <div class="reel">
+    <video src="./video/reel1.mp4"
+           autoplay
+           loop
+           muted></video>
+
+    <div class="reel-actions">
+      <button onclick="likeReel(this)">❤️ <span>0</span></button>
+      <button onclick="openReelComments()">💬</button>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- CREATE POST -->
+  <div class="profile-card post-box">
+    <h5>Create Post</h5>
+    <textarea
+  id="caption"
+  class="form-control mb-3"
+  rows="3"
+  placeholder="What's on your mind?"
+></textarea>
+
+    <button class="btn btn-danger w-100" onclick="createPost()">Post</button>
+  </div>
+
+  <!-- POSTS FEED -->
+  <div class="profile-card" id="feed">
+  <h6>Feed</h6>
+</div>
+
+
+  <!-- Logout Toast -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="logoutToast" class="toast align-items-center text-bg-danger border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">
+        👋 You have logged out successfully
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+   /* const user = JSON.parse(localStorage.getItem("user"));
+document.getElementById("username").innerText = user.profilename;*/
+
+  // Load user
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    window.location.href = "login.html";
+  } else {
+    document.getElementById("username").innerText = "Welcome, " + user.profilename;
+  }
+
+
+  function logout() {
+    // Clear stored user data
+    localStorage.clear();
+
+    // Show toast
+    const toastEl = document.getElementById("logoutToast");
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+
+    // Redirect after 5 seconds
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 5000);
+  }
+
+
+
+  function uploadPhoto(event) {
+    const img = document.getElementById("profilePhoto");
+    img.src = URL.createObjectURL(event.target.files[0]);
+  }
+
+  // Apply saved theme on load
+const themeToggle = document.getElementById("themeToggle");
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-theme");
+  themeToggle.checked = true;
+}
+
+// Toggle theme
+function toggleTheme() {
+  document.body.classList.toggle("dark-theme");
+
+  if (document.body.classList.contains("dark-theme")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+}
+// Create Post
+
+async function createPost() {
+  const caption = document.getElementById("caption").value;
+
+  await fetch("http://localhost:5000/api/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      userId: user.id,
+      caption
+    })
+  });
+
+  loadFeed();
+}
+
+// Load Post
+
+async function loadFeed() {
+  const res = await fetch("http://localhost:5000/api/posts");
+  const posts = await res.json();
+
+  const feed = document.getElementById("feed");
+  feed.innerHTML = "";
+
+  posts.forEach(post => {
+    feed.innerHTML += `
+      <div class="profile-card">
+        <p>${post.caption}</p>
+        <button onclick="likePost('${post._id}', this)">
+          ❤️ ${post.likes.length}
+        </button>
+        <button onclick="showComments('${post._id}')">💬</button>
+        <div id="comments-${post._id}"></div>
+      </div>
+    `;
+  });
+}
+
+loadFeed();
+
+// Like System
+
+async function likePost(postId, btn) {
+  const res = await fetch(
+    `http://localhost:5000/api/posts/${postId}/like`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userId: user.id })
+    }
+  );
+
+  const data = await res.json();
+  btn.innerText = `❤️ ${data.likes}`;
+}
+//Comment System
+
+async function showComments(postId) {
+  const container = document.getElementById(`comments-${postId}`);
+
+  const res = await fetch(
+    `http://localhost:5000/api/comments/${postId}`
+  );
+  const comments = await res.json();
+
+  container.innerHTML = `
+    <input id="c-${postId}" placeholder="Add comment">
+    <button onclick="addComment('${postId}')">Post</button>
+    ${comments.map(c => `<p>${c.text}</p>`).join("")}
+  `;
+}
+
+async function addComment(postId) {
+  const text = document.getElementById(`c-${postId}`).value;
+
+  await fetch("http://localhost:5000/api/comments", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      postId,
+      userId: user.id,
+      text
+    })
+  });
+
+  showComments(postId);
+}
+
+
+function likeReel(btn) {
+  const span = btn.querySelector("span");
+  let count = parseInt(span.innerText);
+  span.innerText = count + 1;
+
+  btn.style.color = "red";
+}
+
+function openReelComments() {
+  alert("Reel comments coming soon 😄");
+}
+
+
+</script>
+
+</body>
+</html>
+

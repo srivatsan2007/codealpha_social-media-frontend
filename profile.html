@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | InstaSphere</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background: #f4f4f4;
+      font-family: Segoe UI, sans-serif;
+    }
+
+    .profile-card {
+      max-width: 500px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ff0066;
+    }
+  </style>
+</head>
+<body>
+
+<div class="profile-card text-center">
+  <h3 class="mb-4">Your Profile</h3>
+
+  <img id="profilePhoto" class="profile-img mb-3" src="" alt="Profile Photo">
+
+  <input type="file" class="form-control mb-3" onchange="uploadPhoto(event)">
+
+  <div class="text-start">
+    <label class="form-label">Username</label>
+    <input type="text" id="username" class="form-control mb-3" readonly>
+<button
+  id="followBtn"
+  class="btn btn-primary mt-3"
+  onclick="toggleFollow()">
+  Follow
+</button>
+
+<p class="mt-2">
+  Followers: <span id="followersCount">0</span>
+</p>
+
+    <label class="form-label">Password (Hashed)</label>
+    <textarea id="password" class="form-control" rows="3" readonly></textarea>
+  </div>
+
+  <a href="home.html" class="btn btn-secondary w-100 mt-4">Back to Home</a>
+  <button class="btn btn-danger mt-4 w-100" onclick="deleteAccount()">
+  🗑️ Delete Account
+</button>
+
+</div>
+
+<script src="profile.js"></script>
+</body>
+</html>

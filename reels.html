@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  margin: 0;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  min-height: 100vh;
+  overflow-y: auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== Reels wrapper ===== */
+.reel {
+  height: 420px;               /* 🔥 reduced size */
+  max-width: 420px;
+  margin: 40px auto;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  background: black;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* Video */
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== Actions ===== */
+.actions {
+  position: absolute;
+  right: 15px;
+  bottom: 80px;
+  color: white;
+  text-align: center;
+}
+
+.actions button {
+  display: block;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: white;
+  font-size: 22px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 10px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.actions button:hover {
+  transform: scale(1.15);
+  background: rgba(255, 0, 102, 0.8);
+}
+
+/* ===== Like button ===== */
+.like-btn .heart {
+  font-size: 26px;
+}
+
+/* ===== Comments Panel ===== */
+.comments-panel {
+  position: absolute;
+  bottom: -100%;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: #111;
+  color: white;
+  transition: bottom 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-panel.active {
+  bottom: 0;
+}
+
+.comments-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.comments-list {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.comment-input {
+  display: flex;
+  border-top: 1px solid #333;
+}
+
+.comment-input input {
+  flex: 1;
+  padding: 10px;
+  background: #222;
+  color: white;
+  border: none;
+}
+
+.comment-input button {
+  background: #ff0055;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+}
+
+/* ===== Mobile only ===== */
+@media (max-width: 768px) {
+  .reel {
+    height: 75vh;     /* immersive only on mobile */
+    max-width: 100%;
+    margin: 0 auto 30px;
+    border-radius: 0;
+  }
+}
+
+
+  </style>
+</head>
+
+<body>
+
+  <div class="reel">
+    <video src="video/reel3.mp4" autoplay muted loop></video>
+  
+
+  <div class="actions">
+    <button class="like-btn" onclick="toggleLike(this)">
+      <span class="heart">🤍</span>
+      <span class="count">120</span>
+    </button>
+
+    <button onclick="openComments(this)">💬</button>
+    <button>🔁</button>
+  </div>
+
+  <!-- COMMENTS PANEL -->
+  <div class="comments-panel">
+    <div class="comments-header">
+      <span>Comments</span>
+      <button onclick="closeComments(this)">✖</button>
+    </div>
+
+    <div class="comments-list">
+      <p><b>alex</b> 🔥🔥</p>
+      <p><b>sam</b> Nice reel!</p>
+    </div>
+
+    <div class="comment-input">
+      <input type="text" placeholder="Add a comment...">
+      <button onclick="addComment(this)">Post</button>
+    </div>
+  </div>
+</div>
+
+    
+    
+
+  <div class="reel">
+    <video src="video/reel4.mp4" autoplay muted loop></video>
+  
+
+  <div class="actions">
+    <button class="like-btn" onclick="toggleLike(this)">
+      <span class="heart">🤍</span>
+      <span class="count">120</span>
+    </button>
+
+    <button onclick="openComments(this)">💬</button>
+    <button>🔁</button>
+  </div>
+
+  <!-- COMMENTS PANEL -->
+  <div class="comments-panel">
+    <div class="comments-header">
+      <span>Comments</span>
+      <button onclick="closeComments(this)">✖</button>
+    </div>
+
+    <div class="comments-list">
+      <p><b>alex</b> 🔥🔥</p>
+      <p><b>sam</b> Nice reel!</p>
+    </div>
+
+    <div class="comment-input">
+      <input type="text" placeholder="Add a comment...">
+      <button onclick="addComment(this)">Post</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function like(btn) {
+    const span = btn.querySelector("span");
+    span.innerText = parseInt(span.innerText) + 1;
+  }
+  const videos = document.querySelectorAll("video");
+
+window.addEventListener("scroll", () => {
+  videos.forEach(video => {
+    const rect = video.getBoundingClientRect();
+    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  });
+});
+
+
+function toggleLike(btn) {
+  const heart = btn.querySelector(".heart");
+  const countEl = btn.querySelector(".count");
+  let count = parseInt(countEl.innerText);
+
+  if (heart.innerText === "🤍") {
+    heart.innerText = "❤️";
+    countEl.innerText = count + 1;
+  } else {
+    heart.innerText = "🤍";
+    countEl.innerText = count - 1;
+  }
+}
+
+function openComments(btn) {
+  const reel = btn.closest(".reel");
+  reel.querySelector(".comments-panel").classList.add("active");
+}
+
+function closeComments(btn) {
+  btn.closest(".comments-panel").classList.remove("active");
+}
+
+function addComment(btn) {
+  const input = btn.previousElementSibling;
+  const text = input.value.trim();
+  if (!text) return;
+
+  const commentsList = btn
+    .closest(".comments-panel")
+    .querySelector(".comments-list");
+
+  commentsList.innerHTML += `<p><b>You</b> ${text}</p>`;
+  input.value = "";
+}
+
+
+
+</script>
+
+</body>
+</html>
