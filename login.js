@@ -8,7 +8,7 @@ async function login() {
   }
 
   try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch("https://codealpha-social-media-backend.onrender.com/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -35,3 +35,4 @@ async function login() {
     console.error(error);
   }
 }
+
