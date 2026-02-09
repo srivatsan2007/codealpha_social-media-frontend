@@ -5,7 +5,7 @@ if (!user) {
 }
 
 // Load user details from backend
-fetch(`http://localhost:5000/api/auth/user/${user.id}`)
+fetch(`https://codealpha-social-media-backend.onrender.com/api/auth/user/${user.id}`)
   .then(res => res.json())
   .then(data => {
     document.getElementById("username").value = data.profilename;
@@ -31,7 +31,7 @@ function uploadPhoto(event) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/auth/delete/${user.id}`,
+        `https://codealpha-social-media-backend.onrender.com/api/auth/delete/${user.id}`,
         {
           method: "DELETE"
         }
@@ -58,7 +58,7 @@ const viewedUserId = new URLSearchParams(window.location.search).get("id");
 
 async function loadProfile() {
   const res = await fetch(
-    `http://localhost:5000/api/auth/user/${viewedUserId}`
+    `https://codealpha-social-media-backend.onrender.com/api/auth/user/${viewedUserId}`
   );
   const user = await res.json();
 
@@ -75,7 +75,7 @@ async function loadProfile() {
 
 async function toggleFollow() {
   const res = await fetch(
-    `http://localhost:5000/api/auth/follow/${viewedUserId}`,
+    `https://codealpha-social-media-backend.onrender.com/api/auth/follow/${viewedUserId}`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -94,6 +94,7 @@ async function toggleFollow() {
 }
 
 loadProfile();
+
 
 
 
